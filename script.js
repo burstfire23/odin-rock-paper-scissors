@@ -53,11 +53,10 @@ function playGame(){
 
     }
 
-    playRound(getHumanChoice(), getComputerChoice());
-    playRound(getHumanChoice(), getComputerChoice());
-    playRound(getHumanChoice(), getComputerChoice());
-    playRound(getHumanChoice(), getComputerChoice());
-    playRound(getHumanChoice(), getComputerChoice());
+    // for (let i = 0; i < 5; i++) {
+    //     playRound(getHumanChoice(), getComputerChoice());
+
+    // }
 
     if (humanScore > computerScore){
         console.log(`You win! The score after five rounds was ${humanScore}-${computerScore}-${tie}`);
