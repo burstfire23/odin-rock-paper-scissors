@@ -2,6 +2,7 @@ let humanScore = 0;
 let computerScore = 0;
 let tie = 0;
 let gameOver = false;
+let resultString = "";
 
 
 function getComputerChoice(){
@@ -23,7 +24,6 @@ function playRound(humanChoice, computerChoice){
     }
 
     humanChoice = humanChoice.toLowerCase();
-    resultString = ""
 
     if (humanChoice == "paper" && computerChoice == "rock") {
         resultString = `You win! ${humanChoice} beats ${computerChoice};`
@@ -48,26 +48,57 @@ function playRound(humanChoice, computerChoice){
         tie++;
     }
 
-    console.log(`Your choice: ${humanChoice}`);
-    console.log(`Computer choice: ${computerChoice}`);
+    displayResults(humanChoice, computerChoice);
 
-    console.log(resultString);
+}
 
-    console.log(`You: ${humanScore}`)
-    console.log(`Computer: ${computerScore}`)
-    console.log(`Ties: ${tie}`)
+const resultsDiv = document.querySelector(".results");
+
+
+function displayResults(humanChoice, computerChoice) {
+    const userChoice = document.createElement("div");
+    userChoice.textContent = `Your choice: ${humanChoice}`;
+    resultsDiv.appendChild(userChoice);
+
+    const compChoice = document.createElement("div");
+    compChoice.textContent = `Computer choice: ${computerChoice}`;
+    resultsDiv.appendChild(compChoice);
+
+    const result = document.createElement("div");
+    result.textContent = resultString;
+    resultsDiv.appendChild(result);
+
+    const userScore = document.createElement("div");
+    userScore.textContent = `You: ${humanScore}`;
+    resultsDiv.appendChild(userScore);
+
+    const compScore = document.createElement("div");
+    compScore.textContent = `Computer: ${computerScore}`;
+    resultsDiv.appendChild(compScore);
+
+    const ties = document.createElement("div");
+    ties.textContent = `Ties: ${tie}`;
+    resultsDiv.appendChild(ties);
 
     if (humanScore == 5 || computerScore == 5) {
         gameOver = true;
         if (humanScore > computerScore){
-            console.log(`You win! The score after five rounds was ${humanScore}-${computerScore}-${tie}`);
+            const winMsg = document.createElement("div");
+            winMsg.textContent = `You win! The score after five rounds was ${humanScore}-${computerScore}-${tie}`;
+            resultsDiv.appendChild(winMsg);
         } else if (humanScore < computerScore) {
-            console.log(`You lose! The score after five rounds was ${humanScore}-${computerScore}-${tie}`);
+            const loseMsg = document.createElement("div");
+            loseMsg.textContent = `You lose! The score after five rounds was ${humanScore}-${computerScore}-${tie}`;
+            resultsDiv.appendChild(loseMsg);
         } else {
-            console.log("It's a tie!");
+            const tieMsg = document.createElement("div");
+            tieMsg.textContent = "It's a tie!";
+            resultsDiv.appendChild(tieMsg);
         }
     }
 
+    const br = document.createElement("br");
+    resultsDiv.appendChild(br);
 }
 
 
